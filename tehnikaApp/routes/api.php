@@ -33,6 +33,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('porudzbine',[PorudzbinaController::class,'store']);
 
 
+   // Route::resource('porudzbine', PorudzbinaController::class ) ;
+
+
     Route::post('logout', [AuthController::class, 'logout']);  
 });
 
