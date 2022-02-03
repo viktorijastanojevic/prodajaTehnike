@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Proizvod;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PorudzbinaFactory extends Factory
@@ -16,8 +18,8 @@ class PorudzbinaFactory extends Factory
         return [
             'datumPorudzbine' => $this->faker->dateTimeBetween($startDate = '-2 years', $endDate = '+2 years', $timezone = null) ,
              'adresaDostave' => $this->faker->address(),
-             'proizvod_id' =>1,
-             'user_id' =>1
+             'proizvod_id' => $this->faker->numberBetween(1,Proizvod::count()),
+             'user_id' => $this->faker->numberBetween(1,User::count())
               
         ];
     }

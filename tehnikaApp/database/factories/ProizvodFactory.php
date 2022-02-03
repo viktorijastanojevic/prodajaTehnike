@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Kategorija;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProizvodFactory extends Factory
@@ -17,7 +18,7 @@ class ProizvodFactory extends Factory
              'nazivProizvoda' => $this->faker->randomElement($array = array ('samsung s21','s22','iphone 13','asus','acer')),
              'opis' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
              'cena' =>  $this->faker->numberBetween($min =20000, $max = 200000),
-             'kategorija_id' =>1,
+             'kategorija_id' =>   $this->faker->numberBetween(1,Kategorija::count()) ,
              'godinaProizvodnje' => $this->faker->numberBetween($min =2016, $max = 2022)
         ];
     }
