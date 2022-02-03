@@ -29,8 +29,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
  
     Route::get('porudzbine',[PorudzbinaController::class,'index']);
     Route::get('porudzbine/{id}',[PorudzbinaController::class,'show']);
-
-
+    Route::delete('porudzbine/{id}',[PorudzbinaController::class,'destroy']);
+    Route::post('porudzbine',[PorudzbinaController::class,'store']);
 
 
     Route::post('logout', [AuthController::class, 'logout']);  

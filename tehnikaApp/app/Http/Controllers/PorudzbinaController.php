@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\PorudzbinaResource;
 use App\Models\Porudzbina;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PorudzbinaController extends Controller
 {
@@ -35,9 +36,26 @@ class PorudzbinaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) //post
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'datumPorudzbine' => 'required',
+            'adresaDostave' => 'required|string|max:100',
+            'proizvod_id' => 'required', 
+            'user_id' => 'required'
+             
+        ]);
+
+        if ($validator->fails()) 
+            return response()->json($validator->errors());
+        $p = Porudzbina::create([
+            'datumPorudzbine' => $request->datumPorudzbine, 
+            'adresaDostave' => $request->adresaDostave, 
+            'proizvod_id' => $request->proizvod_id,
+            'user_id' => $request->user_id
+        ]);
+        $p->save();
+        return response()->json(['Porudzbina kreirana!', new PorudzbinaResource($p)]);
     }
 
     /**
@@ -83,8 +101,15 @@ class PorudzbinaController extends Controller
      * @param  \App\Models\Porudzbina  $porudzbina
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Porudzbina $porudzbina)
+    public function destroy($id) //delete
     {
-        //
+        $p = Porudzbina::find($id);
+        if($p){
+            $p->delete();
+            return response()->json(['Uspesno obrisano!', new PorudzbinaResource($p)]);
+        
+        }
+           
+       return response()->json('Trazeni objekat ne postoji u bazi');
     }
 }

@@ -8,7 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Porudzbina extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'adresaDostave', 
+        'datumPorudzbine',
+        'proizvod_id',
+        'user_id'
 
+
+
+    ];
 
 
     public function proizvod()
