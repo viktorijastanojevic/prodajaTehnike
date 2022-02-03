@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKategorijasTable extends Migration
+class PromeniNazivKoloneUTabeliProizvods extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateKategorijasTable extends Migration
      */
     public function up()
     {
-        Schema::create('kategorijas', function (Blueprint $table) {
-            $table->id();
-            $table->string('naziv');
-            $table->timestamps();
+        Schema::table('proizvods', function (Blueprint $table) {
+            $table->renameColumn('naziv', 'nazivProizvoda');
         });
     }
 
@@ -27,6 +25,8 @@ class CreateKategorijasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kategorijas');
+        Schema::table('proizvods', function (Blueprint $table) {
+            $table->renameColumn('nazivProizvoda', 'naziv');
+        });
     }
 }
