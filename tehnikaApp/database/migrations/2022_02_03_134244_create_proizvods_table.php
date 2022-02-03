@@ -18,7 +18,7 @@ class CreateProizvodsTable extends Migration
             $table->string('naziv');
             $table->string('opis');
             $table->double('cena');
-            $table->foreign('kategorija_id');
+            $table->foreignId('kategorija_id');
             
             // godProizvodnje
             $table->timestamps();

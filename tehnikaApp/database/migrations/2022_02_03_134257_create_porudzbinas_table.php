@@ -19,7 +19,7 @@ class CreatePorudzbinasTable extends Migration
             $table->string("adresaDostave");
             $table->foreignId('proizvod_id');
             $table->foreignId('user_id');
-            $table->double('cena');
+ 
             $table->timestamps();
         });
     }
