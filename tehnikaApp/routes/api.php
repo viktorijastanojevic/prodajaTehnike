@@ -31,7 +31,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('porudzbine/{id}',[PorudzbinaController::class,'show']);
     Route::delete('porudzbine/{id}',[PorudzbinaController::class,'destroy']);
     Route::post('porudzbine',[PorudzbinaController::class,'store']);
-
+    Route::put('porudzbine/{id}',[PorudzbinaController::class,'update']);
 
    // Route::resource('porudzbine', PorudzbinaController::class ) ;
 

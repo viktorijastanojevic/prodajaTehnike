@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\PorudzbinaResource;
+use App\Http\Resources\ProizvodResource;
 use App\Models\Porudzbina;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -90,9 +91,31 @@ class PorudzbinaController extends Controller
      * @param  \App\Models\Porudzbina  $porudzbina
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Porudzbina $porudzbina)
+    public function update(Request $request, $id) //put
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'datumPorudzbine' => 'required',
+            'adresaDostave' => 'required|string|max:100',
+            'proizvod_id' => 'required', 
+            'user_id' => 'required'
+             
+        ]);
+        if ($validator->fails()) 
+             return response()->json($validator->errors());
+        $p = Porudzbina::find($id);
+
+        if($p){
+            $p->datumPorudzbine=$request->datumPorudzbine;
+            $p->adresaDostave=$request->adresaDostave;
+            $p->proizvod_id=$request->proizvod_id;
+            $p->user_id=$request->user_id;
+            $p->save();
+            return response()->json(['Uspesno izmenjeno!', new PorudzbinaResource($p)]);
+
+        }else{
+            return response()->json('Trazeni objekat ne postoji u bazi');
+
+        }
     }
 
     /**
