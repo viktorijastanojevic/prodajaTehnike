@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Porudzbina;
 use Illuminate\Database\Seeder;
 
 class PorudzbinaSeeder extends Seeder
@@ -13,6 +14,6 @@ class PorudzbinaSeeder extends Seeder
      */
     public function run()
     {
-        //
+       Porudzbina::factory(3)->create();
     }
 }

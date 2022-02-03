@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Kategorija;
+use App\Models\Porudzbina;
+use App\Models\Proizvod;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +17,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+
+        User::truncate();
+        Porudzbina::truncate();
+        Proizvod::truncate();
+        Kategorija::truncate();
+
+         \App\Models\User::factory(10)->create();
+
+
+        $ks = new KategorijaSeeder();
+        $ks->run();
+
+        $ps = new ProizvodSeeder();
+        $ps->run();
+
+
+        $pos = new PorudzbinaSeeder();
+        $pos->run();
+
+
     }
 }
